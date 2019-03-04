@@ -1,0 +1,60 @@
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <title>My Todo App</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+            <link rel="stylesheet" href="/stylesheets/main.css">
+           
+          </head>
+          <body>
+            <div class="jumbotron">
+               <div class="container">
+                   <div class="row">
+                      <div class="col-md-9">
+                             <h1 class="display-4">My Todo App!</h1>
+                         <form action="/todo" method="POST">
+                              <div class="form-group">
+                                <label for="todo">Add New Todo</label>
+                                <input type="text" name="todoInput" required class="form-control" id="todo"  placeholder="Enter task">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Add Todo</button>
+                         </form>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        
+    <div class="container">
+        <div class="row">
+           <div class="col-md-9">
+             <ol>
+                <%todos.forEach(function(todo){%>
+                   <li class="<%=todo.hasCompleted===true ? 'done': ''%>">
+                       
+                        <%=todo.task%>
+                      
+                    </li>
+                         <div class="d-flex pt-2 mb-0">
+                            <form action="todo/<%=todo._id%>?_method=PUT" method="POST" style="display: inline;">
+                          <button id="done-icon" type="submit"><i class="fas fa-check-circle"></i></button>
+                         </form>
+                         
+                          <form action="todo/<%=todo._id%>?_method=DELETE" method="POST" style="display: inline;">
+                            <button id="delete-icon" type="submit"><i class="fas fa-trash"></i></button>
+                       </form>
+                      
+                    </div>
+                    
+                <hr>
+                <%})%>
+               
+             </ol>
+              </div>
+             </div>
+            <div>
+            
+         </body>
+        </html>

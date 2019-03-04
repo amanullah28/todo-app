@@ -1,0 +1,12 @@
+
+  .done{
+         color: gray;
+         text-decoration: line-through;
+    }
+   #delete-icon{
+          color: red;
+         }
+     #done-icon{
+            color: green;
+        }
+           
