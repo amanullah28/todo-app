@@ -11,10 +11,17 @@
     
     // Init app
     const app = express();
-        const dbUrl = process.env.DATABASEURL || "mongodb://localhost/todo-app";
-    // connect db
-    mongoose.connect(dbUrl, { useNewUrlParser: true });
-    // console.log(process.env.DATABASEURL);
+
+    // CONNECT DB
+    const url = process.env.DATABASEURL || "mongodb://localhost/restaurant_app";
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, function(err){
+        if(err){
+            console.log(err);
+        } else {
+            console.log("DB CONNECTED!!")
+        }
+    });      // connect db
+
     app.use(bodyParser.urlencoded({extended: true}));
     app.set("view engine", "ejs");
     app.use(express.static(__dirname+"/public"));
@@ -22,10 +29,10 @@
     
     app.use(indexRoute);
 
-    
-    
-   
-    
-    app.listen(process.env.PORT, process.env.IP, function(){
-        console.log("server has started");
+    app.listen(process.env.DEV_PORT,  function(err){
+        if(err) {
+            console.log(err);
+        } else{
+            console.log(`ToDo server has started at port - ${process.env.DEV_PORT}`);
+        }
     });
